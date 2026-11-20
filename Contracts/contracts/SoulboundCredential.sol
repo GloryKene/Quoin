@@ -35,7 +35,7 @@ contract SoulboundCredential is ERC721, Ownable {
 
     modifier onlyIfNotExpired(uint256 tokenId) {
         uint64 exp = expiration[tokenId];
-        require(exp == 0 || uint64(block.timestamp) <= exp, "SBT: credential expired");
+        require(exp == 0 || uint64(block.timestamp) < exp, "SBT: credential expired");
         _;
     }
 
@@ -43,7 +43,7 @@ contract SoulboundCredential is ERC721, Ownable {
         require(_exists(tokenId), "SBT: token does not exist");
         require(!revoked[tokenId], "SBT: credential revoked");
         uint64 exp = expiration[tokenId];
-        require(exp == 0 || uint64(block.timestamp) <= exp, "SBT: credential expired");
+        require(exp == 0 || uint64(block.timestamp) < exp, "SBT: credential expired");
         _;
     }
 
@@ -52,7 +52,7 @@ contract SoulboundCredential is ERC721, Ownable {
         require(_exists(tokenId), "SBT: token does not exist");
         require(!revoked[tokenId], "SBT: credential revoked");
         uint64 exp = expiration[tokenId];
-        if (exp != 0 && uint64(block.timestamp) > exp) {
+        if (exp != 0 && uint64(block.timestamp) >= exp) {
             emit CredentialExpired(tokenId, exp);
             revert("SBT: credential expired");
         }
@@ -169,7 +169,7 @@ contract SoulboundCredential is ERC721, Ownable {
         if (revoked[tokenId]) return false;
         uint64 exp = expiration[tokenId];
         if (exp == 0) return true;
-        if (uint64(block.timestamp) <= exp) return true;
+        if (uint64(block.timestamp) < exp) return true;
         // Credential is expired — event emitted via onlyActive modifier on write paths;
         // for view-only checks, callers should also check isExpired().
         return false;
@@ -184,7 +184,7 @@ contract SoulboundCredential is ERC721, Ownable {
     function isExpired(uint256 tokenId) external view returns (bool) {
         uint64 exp = expiration[tokenId];
         if (exp == 0) return false;
-        return uint64(block.timestamp) > exp;
+        return uint64(block.timestamp) >= exp;
     }
 
     /// @dev Returns the full revocation record: (revoked, timestamp, reason).

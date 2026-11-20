@@ -25,6 +25,9 @@ export class LoginNonce {
   @Column({ type: 'timestamp', nullable: true })
   consumedAt?: Date | null;
 
+  @Column({ type: 'varchar', length: 255, nullable: true })
+  failureReason?: string | null;
+
   @CreateDateColumn({ type: 'timestamp' })
   createdAt: Date;
 }

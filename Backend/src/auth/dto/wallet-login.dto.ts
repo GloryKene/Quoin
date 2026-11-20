@@ -6,8 +6,8 @@ export class WalletLoginDto {
     description: 'Stellar public key',
     example: 'GABC123...',
   })
-  @IsString()
-  @IsNotEmpty()
+  @IsString({ message: 'publicKey must be a string' })
+  @IsNotEmpty({ message: 'publicKey is required' })
   @Matches(/^G[A-Z0-9]{55}$/, { message: 'Invalid Stellar public key format' })
   publicKey: string;
 
@@ -15,15 +15,15 @@ export class WalletLoginDto {
     description: 'Base64-encoded signature of the nonce',
     example: 'abc123...',
   })
-  @IsString()
-  @IsNotEmpty()
+  @IsString({ message: 'signature must be a string' })
+  @IsNotEmpty({ message: 'signature is required' })
   signature: string;
 
   @ApiProperty({
     description: 'Nonce received from /auth/nonce endpoint',
     example: '550e8400-e29b-41d4-a716-446655440000',
   })
-  @IsString()
-  @IsNotEmpty()
+  @IsString({ message: 'nonce must be a string' })
+  @IsNotEmpty({ message: 'nonce is required' })
   nonce: string;
 }

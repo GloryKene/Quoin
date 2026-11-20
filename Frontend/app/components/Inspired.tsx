@@ -27,11 +27,11 @@ function Inspired() {
                 <Image src={marketBeliefImg} alt="Market Belief Image" className="mb-4" />
                 <p className="text-2xl lg:text-[1.875rem] leading-tight text-[#e988f2]">Get daily AI-powered summaries of crypto trends, price movements, and key market signals—explained in simple, beginner-friendly language.</p>
             </div>
-            <div className="w-full max-w-1104.25 h-141.25 bg-[#d1e7f3] text-black shadow-[0px_4px_80px_10px_#4a1faf] rounded-[28px] border-4 border-[#e988f2]/20 px-6 py-4">
+            <div className="w-full max-w-1104.25 h-141.25 bg-[#11152f] text-white shadow-[0px_4px_80px_10px_#4a1faf] rounded-[28px] border-4 border-[#e988f2]/20 px-6 py-4">
                 <Image src={learningPathIcon} alt="Smart Learning Path Icon" className="mb-16" />
                 <h3 className="font-normal text-4xl mb-4">Smart Learning Path</h3>
                 <Image src={learningPathImg} alt="Smart Learning Path Image" className="mb-4" />
-                <p className="text-2xl lg:text-[1.875rem] leading-tight">Master crypto from beginner to pro with AI-guided lessons and instant feedback.</p>
+                <p className="text-2xl lg:text-[1.875rem] leading-tight text-white/80">Master crypto from beginner to pro with AI-guided lessons and instant feedback.</p>
             </div>
             <div className="w-full max-w-1104.25 h-141.25 bg-[#1a1a4d] shadow-[0px_4px_80px_10px_#9e8d6b] rounded-[28px] border-4 border-white/20 px-6 py-4">
                 <Image src={confidenceIcon} alt="Trade Confidence Icon" className="mb-16" />
@@ -47,7 +47,6 @@ function Inspired() {
 export default Inspired
 
  
-
 
 
 

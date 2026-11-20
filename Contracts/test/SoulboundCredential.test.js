@@ -302,6 +302,17 @@ describe("SoulboundCredential", function () {
   // ── Expiration edge cases ─────────────────────────────────────────────
 
   describe("Expiration edge cases", function () {
+    it("should treat the exact expiration timestamp as expired", async () => {
+      const latestBlock = await ethers.provider.getBlock("latest");
+      const expTime = latestBlock.timestamp + 100;
+      await sbt.issue(alice.address, 50, expTime);
+      await ethers.provider.send("evm_setNextBlockTimestamp", [expTime]);
+      await ethers.provider.send("evm_mine", []);
+
+      expect(await sbt.valid(50)).to.equal(false);
+      expect(await sbt.isExpired(50)).to.equal(true);
+    });
+
     it("should handle credential expiring during validity check", async () => {
       // Get current blockchain timestamp to avoid JS/blockchain time drift
       const latestBlock = await ethers.provider.getBlock("latest");
